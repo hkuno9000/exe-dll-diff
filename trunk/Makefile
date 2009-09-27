@@ -54,10 +54,10 @@ example.tmp: $(TARGETS)
 	-echo exediff $(WINDIR)\system32\msvcp50.dll $(WINDIR)\system32\msvcp60.dll >$@
 	-$(TARGET)    $(WINDIR)\system32\msvcp50.dll $(WINDIR)\system32\msvcp60.dll >>$@
 
-html\exediff-manual.html: gendoc
+html\exediff-manual.html: gendoc Makefile
 	perl -n << html\main.html >$@
-		next if /<div class=.qindex/;			# navi-bar ‚ğœ‹‚·‚é.
-		s/<img src=.doxygen.png.+border=0 >/doxygen/;	# footer ‚Ì doxygenƒƒS‚ğtext‚É’u‚«Š·‚¦‚é.
+		next if /^<div class="navigation"/.../^<\/div>/;		# navi-bar ‚ğœ‹‚·‚é.
+		s/<img class="footer" src="doxygen.png".+\/>/doxygen/;	# footer ‚Ì doxygenƒƒS‚ğtext‚É’u‚«Š·‚¦‚é.
 		print;
 <<
 
