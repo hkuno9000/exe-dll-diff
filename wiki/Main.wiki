@@ -1,3 +1,4 @@
+#labels Featured,Phase-Design,Phase-Deploy
 =exediff - find differences between two exe/dll files=
  release v1.x
 ==はじめに==
@@ -27,4 +28,4 @@ usage :exediff [-h?tdq][-n#] (FILE1 FILE2 | DIR1 DIR2 [WILD] | DIR1 DIR2\WILD)
   WILD    compare files pattern in DIR2. default is *
 }}}
 ==オリジナルサイト==
-http://hp.vector.co.jp/authors/VA002803/exediff.html
+ * http://hp.vector.co.jp/authors/VA002803/exediff.html
