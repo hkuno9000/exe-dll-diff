@@ -1,0 +1,11 @@
+=作業記録=
+
+==2009-09-27==
+Visual C++ 2008 Express Edition でソリューションを作成する
+ * ファイル＞新規作成＞既存のコードからプロジェクトを作成
+ * プロジェクト名＝exediff
+ * アプリケーションの種類＝コンソールアプケーション
+ * プリプロセッサ定義＝_CRT_SECURE_NO_WARNINGS 
+==2009-09-26==
+exediff v1.11 をインポートし、作業を開始する
+ * インポート元 [http://hp.vector.co.jp/authors/VA002803/exediff.html]
