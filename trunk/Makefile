@@ -30,7 +30,7 @@ build:
 
 zip:
 	svn status
-	zip exe-dll-diff-src.zip Makefile Doxyfile *.sln *.vcproj src/* test/* -x *.aps
+	zip exe-dll-diff-src.zip Makefile Doxyfile *.sln *.vcproj *.vsprops src/* test/* -x *.aps
 	zip exe-dll-diff-exe.zip -j Release/*.exe html/*-manual.html html/*.css
 
 rel: rebuild gendoc man zip
