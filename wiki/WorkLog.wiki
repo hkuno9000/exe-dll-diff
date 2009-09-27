@@ -11,6 +11,8 @@ Visual C++ 2008 Express Edition でソリューションを作成する
  * リソースファイルを追加し、バージョン情報を記入した
  * nmake によるビルドとリリースを整備した
  * doxygen 1.6 に更新し、設定ファイルを調整した
+ * myconfigを設けて、リリース・デバッグ共通の条件マクロをそこへ記入した
+ * VS2008では time_t のサイズが64bitになっている。32bitを仮定してprintfへ渡していた処理を修正した
 ==2009-09-26==
 exediff v1.11 をインポートし、作業を開始する
  * インポート元 [http://hp.vector.co.jp/authors/VA002803/exediff.html]
