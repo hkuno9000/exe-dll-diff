@@ -47,10 +47,10 @@ viewdoc: html\index.html
 html\index.html: src/*.cpp Doxyfile usage.tmp example.tmp
 	doxygen
 
-usage.tmp: $(TARGETS)
+usage.tmp: $(TARGET)
 	-$(TARGET) -h 2>$@
 
-example.tmp: $(TARGETS)
+example.tmp: $(TARGET)
 	-echo exediff $(WINDIR)\system32\msvcp50.dll $(WINDIR)\system32\msvcp60.dll >$@
 	-$(TARGET)    $(WINDIR)\system32\msvcp50.dll $(WINDIR)\system32\msvcp60.dll >>$@
 
