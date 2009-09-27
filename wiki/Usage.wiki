@@ -1,0 +1,13 @@
+= Usage =
+{{{
+usage :exediff [-h?tdq][-n#] (FILE1 FILE2 | DIR1 DIR2 [WILD] | DIR1 DIR2¥WILD)
+  $Revision: 1.11 $
+  -h -?   this help
+  -t      ignore time stamp
+  -d      dump file image
+  -q      quiet mode
+  -n#     max length of differ rawdatas. default is 4
+  FILE1/2 compare exe/dll file
+  DIR1/2  compare folder
+  WILD    compare files pattern in DIR2. default is *
+}}}
