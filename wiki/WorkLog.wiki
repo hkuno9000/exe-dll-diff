@@ -8,6 +8,7 @@ Visual C++ 2008 Express Edition でソリューションを作成する
  * プリプロセッサ定義＝_CRT_SECURE_NO_WARNINGS
  * ビルド警告が出るので、Wp64オプションとインクリメンタルリンクを外した
  * リリース版のランタイムを /MD から /MT に変更し、単独実行可能とする
+ * リソースファイルを追加し、バージョン情報を記入した
 ==2009-09-26==
 exediff v1.11 をインポートし、作業を開始する
  * インポート元 [http://hp.vector.co.jp/authors/VA002803/exediff.html]
