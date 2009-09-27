@@ -446,12 +446,13 @@ const char* MachineString(WORD value, char* buf=NULL)
 	return buf;
 }
 
-const char* TimeDateString(time_t t, char* buf=NULL)
+const char* TimeDateString(DWORD t, char* buf=NULL)
 {
 	static char mybuf[100];
 	if (!buf) buf = mybuf;
+	time_t timet = t;
 
-	char* s = ctime(&t); if (!s) s = "? ";
+	char* s = ctime(&timet); if (!s) s = "? ";
 	sprintf(buf, "%08X(%.*s)", t, strlen(s)-1, s);	// ctime が返す日付文字列は末尾に改行が付くので、最大長さを指定して抜く.
 
 	return buf;
