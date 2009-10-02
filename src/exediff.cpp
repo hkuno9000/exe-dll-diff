@@ -1,6 +1,6 @@
 /**@file exediff.cpp -- diff exe/dll files.
  * $Id: exediff.cpp,v 1.11 2004/06/30 06:59:44 hkuno Exp $
- * @author Hiroshi Kuno <hkuno-exediff-tool@micorhouse.co.jp>
+ * @author Hiroshi Kuno <hkuno-exediff-tool@microhouse.co.jp>
  */
 #include <windows.h>
 #include <imagehlp.h>
@@ -32,6 +32,9 @@ typedef unsigned long ulong;
 /** -t: ignore time stamp */
 bool gIgnoreTimeStamp = false;
 
+/** -c: ignore check sum */
+bool gIgnoreCheckSum = false;
+
 /** -d: dump file image */
 bool gDumpFileImage = false;
 
@@ -47,13 +50,14 @@ bool gDirDiff = false;
 //........................................................................
 // messages
 /** short help-message */
-const char* gUsage  = "usage :exediff [-h?tdq][-n#] (FILE1 FILE2 | DIR1 DIR2 [WILD] | DIR1 DIR2\\WILD)\n";
+const char* gUsage  = "usage :exediff [-h?tcdq][-n#] (FILE1 FILE2 | DIR1 DIR2 [WILD] | DIR1 DIR2\\WILD)\n";
 
 /** detail help-message for options and version */
 const char* gUsage2 =
-	"  $Revision: 1.11 $\n"
+	"  version 1.12\n"
 	"  -h -?   this help\n"
 	"  -t      ignore time stamp\n"
+	"  -c      ignore check sum\n"
 	"  -d      dump file image\n"
 	"  -q      quiet mode\n"
 	"  -n#     max length of differ rawdatas. default is 4\n"
@@ -554,7 +558,7 @@ int diff_header(const char* prompt, const IMAGE_OPTIONAL_HEADER& opt1, const IMA
 	DIFFLONG(opt, Win32VersionValue);
 	DIFFLONG(opt, SizeOfImage);
 	DIFFLONG(opt, SizeOfHeaders);
-	DIFFLONG(opt, CheckSum);
+	if (!gIgnoreCheckSum) { DIFFLONG(opt, CheckSum); }
 	DIFFSTRF(opt, Subsystem, SubsystemString);
 	DIFFWORD(opt, DllCharacteristics);
 	DIFFLONG(opt, SizeOfStackReserve);
@@ -776,6 +780,9 @@ show_help:			error_abort(gUsage2);
 				case 't':
 					gIgnoreTimeStamp = true;
 					break;
+				case 'c':
+					gIgnoreCheckSum = true;
+					break;
 				case 'd':
 					gDumpFileImage = true;
 					break;
@@ -832,14 +839,14 @@ show_help:			error_abort(gUsage2);
 }
 
 //------------------------------------------------------------------------
-/**@mainpage exediff - find differences between two exe/dll files
+/**@mainpage find differences between two windows binary files(exe/dll)
 
-@version $Revision: 1.11 $
+@version 1.12
 
-@author Hiroshi Kuno <hkuno-exediff-tool@micorhouse.co.jp>
+@author Hiroshi Kuno <hkuno-exediff-tool@microhouse.co.jp>
 
 @par License:
-	Copyright &copy; 2004 by Hiroshi Kuno
+	Copyright &copy; 2004,2009 by Hiroshi Kuno
 	<br>本ソフトウェアは無保証かつ無償で提供します。利用、再配布、改変は自由です。
 
 <hr>
@@ -851,7 +858,7 @@ show_help:			error_abort(gUsage2);
 	- ロードイメージのヘッダ構造を認識し、構造単位での比較を行います。
 	- ロードイメージのセクションデータ(RAWDATA)の比較では、差異が一定量に達したら比較を打ち切ります。
 	- ディレクトリ間で複数ファイルの比較ができます。
-	- ロードイメージに埋め込まれたタイムスタンプ部分を除外して比較できます。
+	- オプション指定により、ロードイメージに埋め込まれたタイムスタンプとチェックサムを除外して比較できます。
 	- 比較ファイルのテキスト形式ダンプ(dumpbin /all 相当)を出力できます。
 
 @section env 動作環境
@@ -876,11 +883,14 @@ show_help:			error_abort(gUsage2);
 
 @section links リンク
 	- http://hp.vector.co.jp/authors/VA002803/exediff.html - exediff公開サイト
+	- http://code.google.com/p/exe-dll-diff/ - exediff開発サイト
 
 @section download ダウンロード
-	- http://hp.vector.co.jp/authors/VA002803/arc/exediff111.zip - 最新版 [June 30, 2004]
+	- http://code.google.com/p/exe-dll-diff/downloads/list - 最新版 v1.12[Oct 2, 2009]
+	- http://hp.vector.co.jp/authors/VA002803/arc/exediff111.zip - 旧版 v1.11 [June 30, 2004]
 
 @section changelog 改訂履歴
+	@subsection Rel112 version 1.12 [Oct 2, 2009] チェックサム無視対応版
 	@subsection Rel111 Release 1.11 [June 30, 2004] 公開初版
 */
 
