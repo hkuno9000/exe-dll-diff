@@ -34,7 +34,7 @@ END
 
 2 TEXTINCLUDE 
 BEGIN
-    "#include ""afxres.h""\r\n"
+    "#include <winresrc.h>//""afxres.h""\r\n"
     "\0"
 END
 
@@ -53,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,11,0,1
- PRODUCTVERSION 1,11,0,1
+ FILEVERSION 1,12,0,1
+ PRODUCTVERSION 1,12,0,1
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -72,12 +72,12 @@ BEGIN
             VALUE "Comments", "ProjectHome: http://code.google.com/p/exe-dll-diff/"
             VALUE "CompanyName", "New BSD License"
             VALUE "FileDescription", "find differences between two windows binary files(exe/dll)."
-            VALUE "FileVersion", "1, 11, 0, 1"
+            VALUE "FileVersion", "1, 12, 0, 1"
             VALUE "InternalName", "exediff"
             VALUE "LegalCopyright", "Copyright (C) 2009"
             VALUE "OriginalFilename", "exediff.exe"
             VALUE "ProductName", "exe-dll-diff"
-            VALUE "ProductVersion", "1, 11, 0, 1"
+            VALUE "ProductVersion", "1, 12, 0, 1"
         END
     END
     BLOCK "VarFileInfo"
