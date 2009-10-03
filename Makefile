@@ -33,9 +33,6 @@ rebuild:
 
 build: $(TARGET)
 
-$(TARGET): $(SRC)
-	vcbuild exediff.sln
-
 zip:
 	svn status
 	zip exe-dll-diff-src.zip $(SRC) Doxyfile *.pl test/* -x *.aps
@@ -51,6 +48,16 @@ man: $(MANUAL)
 
 doxy: $(DOXYINDEX)
 	start $**
+
+verup:
+	svn up
+	perl -i.bak version-up.pl src/exediff.cpp src/*.cpp src/*.rc
+
+#.........................................................................
+# BUILD
+#
+$(TARGET): $(SRC)
+	vcbuild exediff.sln
 
 #.........................................................................
 # DOCUMENT
