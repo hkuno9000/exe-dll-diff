@@ -6,10 +6,14 @@
 # MACROS
 #
 TARGET=Release\exediff.exe
+MANUAL=html\exediff-manual.html
+DOXYINDEX=html\index.html
 
 #-------------------------------------------------------------------------
 # MAIN TARGET
 all:	build
+
+rel:	rebuild $(MANUAL) zip
 
 #-------------------------------------------------------------------------
 # COMMANDS
@@ -17,7 +21,7 @@ all:	build
 cleanall: clean
 	-del *.zip *.ncb *.user *.dat *.cache *.bak *.tmp $$*
 	-del src\*.aps src\*.bak
-	-del html\*.html html\*.???
+	-del /q html\*.* Release\*.* Debug\*.*
 
 clean:
 	vcbuild /clean   exediff.sln
@@ -25,7 +29,9 @@ clean:
 rebuild:
 	vcbuild /rebuild exediff.sln
 
-build:
+build: $(TARGET)
+
+$(TARGET): src/*.* Makefile
 	vcbuild exediff.sln
 
 zip:
@@ -33,28 +39,31 @@ zip:
 	zip exe-dll-diff-src.zip Makefile Doxyfile *.sln *.vcproj *.vsprops src/* test/* -x *.aps
 	zip exe-dll-diff-exe.zip -j Release/*.exe html/*-manual.html html/*.css
 
-rel: rebuild gendoc man zip
+install: $(TARGET) $(MANUAL)
+	copy $(TARGET) \home\bin
+	copy $(MANUAL)  docs
+	copy html\*.css docs
+
+man: $(MANUAL)
+	start $**
+
+doxy: $(DOXYINDEX)
+	start $**
+
 #.........................................................................
 # DOCUMENT
 #
-man: html\exediff-manual.html
-
-gendoc: html\index.html
-
-viewdoc: html\index.html
-	start $**
-
-html\index.html: src/*.cpp Doxyfile usage.tmp example.tmp
+$(DOXYINDEX): src/*.cpp Doxyfile usage.tmp example.tmp
 	doxygen
 
-usage.tmp: $(TARGET)
+usage.tmp: $(TARGET) Makefile
 	-$(TARGET) -h 2>$@
 
-example.tmp: $(TARGET)
+example.tmp: $(TARGET) Makefile
 	-echo exediff $(WINDIR)\system32\msvcp50.dll $(WINDIR)\system32\msvcp60.dll >$@
 	-$(TARGET)    $(WINDIR)\system32\msvcp50.dll $(WINDIR)\system32\msvcp60.dll >>$@
 
-html\exediff-manual.html: gendoc Makefile
+$(MANUAL): $(DOXYINDEX) Makefile
 	perl -n << html\main.html >$@
 		next if /^<div class="navigation"/.../^<\/div>/;		# navi-bar ‚ğœ‹‚·‚é.
 		s/<img class="footer" src="doxygen.png".+\/>/doxygen/;	# footer ‚Ì doxygenƒƒS‚ğtext‚É’u‚«Š·‚¦‚é.
