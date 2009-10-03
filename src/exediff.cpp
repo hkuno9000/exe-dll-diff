@@ -846,6 +846,7 @@ show_help:			error_abort(gUsage2);
 @author Hiroshi Kuno <hkuno-exediff-tool@microhouse.co.jp>
 
 @par License:
+	New BSD License
 	Copyright &copy; 2004,2009 by Hiroshi Kuno
 	<br>本ソフトウェアは無保証かつ無償で提供します。利用、再配布、改変は自由です。
 
@@ -886,11 +887,11 @@ show_help:			error_abort(gUsage2);
 	- http://code.google.com/p/exe-dll-diff/ - exediff開発サイト
 
 @section download ダウンロード
-	- http://code.google.com/p/exe-dll-diff/downloads/list - 最新版 v1.12[Oct 2, 2009]
+	- http://code.google.com/p/exe-dll-diff/downloads/list - 最新版 v1.12[October 3, 2009]
 	- http://hp.vector.co.jp/authors/VA002803/arc/exediff111.zip - 旧版 v1.11 [June 30, 2004]
 
 @section changelog 改訂履歴
-	@subsection Rel112 version 1.12 [Oct 2, 2009] チェックサム無視対応版
+@subsection Rel112 version 1.12 [October 3, 2009] チェックサム無視対応版
 	@subsection Rel111 Release 1.11 [June 30, 2004] 公開初版
 */
 

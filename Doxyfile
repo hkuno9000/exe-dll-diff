@@ -71,7 +71,7 @@ SHOW_USED_FILES        = YES
 SHOW_DIRECTORIES       = NO
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
-FILE_VERSION_FILTER    =
+FILE_VERSION_FILTER    ="perl version-filt.pl" 
 LAYOUT_FILE            =
 #---------------------------------------------------------------------------
 # configuration options related to warning and progress messages
