@@ -8,9 +8,11 @@
 TARGET=Release\exediff.exe
 MANUAL=html\exediff-manual.html
 DOXYINDEX=html\index.html
+SRC=Makefile *.sln *.vcproj *.vsprops src/*
 
 #-------------------------------------------------------------------------
 # MAIN TARGET
+#
 all:	build
 
 rel:	rebuild $(MANUAL) zip
@@ -31,13 +33,13 @@ rebuild:
 
 build: $(TARGET)
 
-$(TARGET): src/*.* Makefile
+$(TARGET): $(SRC)
 	vcbuild exediff.sln
 
 zip:
 	svn status
-	zip exe-dll-diff-src.zip Makefile Doxyfile *.sln *.vcproj *.vsprops src/* test/* -x *.aps
-	zip exe-dll-diff-exe.zip -j Release/*.exe html/*-manual.html html/*.css
+	zip exe-dll-diff-src.zip $(SRC) Doxyfile *.pl test/* -x *.aps
+	zip exe-dll-diff-exe.zip -j Release/*.exe $(MANUAL) html/*.css
 
 install: $(TARGET) $(MANUAL)
 	copy $(TARGET) \home\bin
