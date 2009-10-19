@@ -417,14 +417,25 @@ const char* SubsystemString(WORD value, char* buf=NULL)
 	static char mybuf[100];
 	if (!buf) buf = mybuf;
 
+	// http://msdn.microsoft.com/en-us/library/ms680339(VS.85).aspx
+	// Subsystem
 	const char* id = "?";
 	switch (value) {
 	#define C(v, name)	case v: id = name
-	C(IMAGE_SUBSYSTEM_UNKNOWN,    "unknown");       break;	// Unknown subsystem.
-	C(IMAGE_SUBSYSTEM_NATIVE,     "native");        break;	// No subsystem required. 
-	C(IMAGE_SUBSYSTEM_WINDOWS_CUI,"WIN32 console"); break;	// Windows character-mode subsystem. 
-	C(IMAGE_SUBSYSTEM_POSIX_CUI,  "POSIX console"); break;	// POSIX character-mode subsystem. 
-	C(IMAGE_SUBSYSTEM_WINDOWS_CE_GUI,"Windows CE"); break;	// Windows CE. 
+	C(IMAGE_SUBSYSTEM_UNKNOWN,        "unknown");         break;		// Unknown subsystem.
+	C(IMAGE_SUBSYSTEM_NATIVE,         "native");          break; 		// No subsystem required (device drivers and native system processes).
+	C(IMAGE_SUBSYSTEM_WINDOWS_GUI,    "Windows GUI");     break;		// Windows graphical user interface (GUI) subsystem.
+	C(IMAGE_SUBSYSTEM_WINDOWS_CUI,    "Windows console"); break;		// Windows character-mode user interface (CUI) subsystem.
+	C(IMAGE_SUBSYSTEM_OS2_CUI,        "OS/2 console");    break;		// OS/2 CUI subsystem.
+	C(IMAGE_SUBSYSTEM_POSIX_CUI,      "POSIX console");   break;		// POSIX CUI subsystem.
+	C(IMAGE_SUBSYSTEM_NATIVE_WINDOWS, "native Win9x driver"); break;	// image is a native Win9x driver.
+	C(IMAGE_SUBSYSTEM_WINDOWS_CE_GUI, "Windows CE");      break;		// Windows CE system.
+	C(IMAGE_SUBSYSTEM_EFI_APPLICATION,         "Extensible Firmware Interface(EFI) application"); break;
+	C(IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER, "Extensible Firmware Interface(EFI) driver with boot services"); break;
+	C(IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER,      "Extensible Firmware Interface(EFI) driver with run-time services"); break;
+	C(IMAGE_SUBSYSTEM_EFI_ROM,                 "Extensible Firmware Interface(EFI) ROM image"); break;
+	C(IMAGE_SUBSYSTEM_XBOX,                    "Xbox system"); break;
+	C(IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION,"Boot application"); break;
 	#undef C
 	}
 	sprintf(buf, "%04X(%s)", value, id);
@@ -441,7 +452,7 @@ const char* MachineString(WORD value, char* buf=NULL)
 	#define C(v, name)	case v: id = name
 	C(IMAGE_FILE_MACHINE_I386,   "32-bit Intel"); break;
 	C(IMAGE_FILE_MACHINE_IA64,   "64-bit Intel"); break;
-//	C(IMAGE_FILE_MACHINE_AMD64,  "64-bit AMD"); break;		// VC6‚Ìƒwƒbƒ_‚É‚Í,AMD64‚Ì’è‹`‚ª‚È‚¢.
+	C(IMAGE_FILE_MACHINE_AMD64,  "64-bit AMD"); break;
 	C(IMAGE_FILE_MACHINE_ALPHA,  "DEC Alpha"); break;
 	C(IMAGE_FILE_MACHINE_POWERPC,"Power PC"); break;
 	#undef C
